@@ -1,3 +1,6 @@
+// TODO
+//  Change fusion table to sheets
+
 package socialskip;
 
 import java.io.IOException;
