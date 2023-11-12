@@ -33,7 +33,7 @@ public class ChartsDataServlet extends HttpServlet {
 		String transid = req.getParameter("transid");
 
 		try {
-			SheetsQuickstart table = new SheetsQuickstart();
+			SheetsApi table = new SheetsApi();
 
 			if(ResearcherVideosServlet.isVideoResearcher(expid)) {
 

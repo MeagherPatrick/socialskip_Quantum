@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * GData Java Client Library - opencsv
  *
  */
-public class SheetsQuickstart {
+public class SheetsApi {
 	private static final String APPLICATION_NAME = "Google Sheets API Java Quickstart";
 	private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 	private static final String TOKENS_DIRECTORY_PATH = "tokens";
@@ -75,7 +75,7 @@ public class SheetsQuickstart {
 	private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
 			throws IOException {
 		// Load client secrets.
-		InputStream in = SheetsQuickstart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+		InputStream in = SheetsApi.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
 		if (in == null) {
 			throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
 		}
