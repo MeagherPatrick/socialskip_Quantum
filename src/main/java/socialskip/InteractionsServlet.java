@@ -14,7 +14,7 @@ import java.util.Date;
 
 import javax.servlet.http.*;
 
-import socialskip.FusionApi;
+import socialskip.SheetsApi;
 
 /**
  * This servlet is responsible for collecting the interactions on the watched
@@ -44,7 +44,7 @@ public class InteractionsServlet extends HttpServlet {
 		for (int n = 0; n < interactions.size(); n++) {
 			JsonObject jo = interactions.get(n).getAsJsonObject();
 			
-			s.append("INSERT INTO " + FusionApi.INTERACTIONS + " (VideoId, TesterId, TransactionId, Time, SkipTime, TransactionTime) "
+			s.append("INSERT INTO " + SheetsApi.INTERACTIONS + " (VideoId, TesterId, TransactionId, Time, SkipTime, TransactionTime) "
 					+ "VALUES (" + jo.get("expid").getAsString() + ", '"); // One record for each interaction
 			s.append(jo.get("tester").getAsString() + "', ");
 			s.append(jo.get("code").getAsString() + ", "); // TransactionId
@@ -55,7 +55,7 @@ public class InteractionsServlet extends HttpServlet {
 		}
 		
 		try {
-			FusionApi tables = new FusionApi();
+			SheetsApi tables = new SheetsApi();
 			tables.run(s.toString()); // Send request to Fusion Table Service
 		} catch (Exception e) {
 			result = "ERROR";

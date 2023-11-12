@@ -41,11 +41,11 @@ public class UserInfo {
      * returns true if it is otherwise returns false*/
 	public static boolean isResearcher(String mail)
 			throws IOException, IndexOutOfBoundsException, ServletException, GeneralSecurityException {
-    	FusionApi tables = new FusionApi();
+    	SheetsApi tables = new SheetsApi();
 		boolean found = false;
 		mail = mail.toLowerCase();
 		// Check Researchers table to see if user is there
-	 	tables.run("SELECT Mail FROM " + FusionApi.RESEARCHERS + " WHERE Mail='" + mail +"'");
+	 	tables.run("SELECT Mail FROM " + SheetsApi.RESEARCHERS + " WHERE Mail='" + mail +"'");
 	 	
 	 	try {
 		 	String[] firstrow = tables.getFirstRow();
@@ -64,8 +64,8 @@ public class UserInfo {
 	/* This method returns the researcher Id*/
 	public static String getResearcherID()
 			throws IOException, IndexOutOfBoundsException, ServletException, GeneralSecurityException {
-    	FusionApi tables = new FusionApi();
-	 	tables.run("SELECT ROWID FROM " + FusionApi.RESEARCHERS + " WHERE Mail='" + getMail() + "'");
+    	SheetsApi tables = new SheetsApi();
+	 	tables.run("SELECT ROWID FROM " + SheetsApi.RESEARCHERS + " WHERE Mail='" + getMail() + "'");
 		return tables.getFirstRow()[0].toString();
 	}
 	

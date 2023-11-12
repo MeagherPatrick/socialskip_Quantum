@@ -34,13 +34,13 @@ public class SocialSkipAPIv1 extends HttpServlet {
 		String interactionsParam = req.getParameter("interactions");
 
 		try {
-			FusionApi at_table = new FusionApi();
+			SheetsApi at_table = new SheetsApi();
 
-			at_table.run("SELECT ResearcherId FROM " +  FusionApi.ACCESS_TOKENS + " WHERE AccessToken='" + req.getParameter("access_token") + "'");
+			at_table.run("SELECT ResearcherId FROM " +  SheetsApi.ACCESS_TOKENS + " WHERE AccessToken='" + req.getParameter("access_token") + "'");
 
 			if ( at_table.rowCount() > 0 ) {
 
-				FusionApi table = new FusionApi();
+				SheetsApi table = new SheetsApi();
 
 				StringBuilder where = new StringBuilder();
 				where.append(" WHERE ");
@@ -56,7 +56,7 @@ public class SocialSkipAPIv1 extends HttpServlet {
 
 					if (uri[4].toLowerCase().equals("experiment") && !uri[5].isEmpty()) {
 
-						table.run("SELECT ROWID FROM " +  FusionApi.EXPERIMENTS + " WHERE ResearcherId='" + at_table.getFirstRow()[0] + "' AND ROWID='" + uri[5] + "'");
+						table.run("SELECT ROWID FROM " +  SheetsApi.EXPERIMENTS + " WHERE ResearcherId='" + at_table.getFirstRow()[0] + "' AND ROWID='" + uri[5] + "'");
 
 						if ( table.rowCount() > 0 ) {
 							where.append("VideoId='" + uri[5] + "'");
@@ -70,12 +70,12 @@ public class SocialSkipAPIv1 extends HttpServlet {
 						String hasQuestionnaire = req.getParameter("has_questionnaire");
 						if (hasQuestionnaire != null && !(hasQuestionnaire.isEmpty())) {
 							if (hasQuestionnaire.toLowerCase().equals("yes")) {
-								table.run("SELECT ROWID FROM " +  FusionApi.EXPERIMENTS + " WHERE ResearcherId='" + at_table.getFirstRow()[0] + "' AND VideoURL LIKE '%/" + uri[5] + "'  AND Questionnaire LIKE '%/%'");
+								table.run("SELECT ROWID FROM " +  SheetsApi.EXPERIMENTS + " WHERE ResearcherId='" + at_table.getFirstRow()[0] + "' AND VideoURL LIKE '%/" + uri[5] + "'  AND Questionnaire LIKE '%/%'");
 							} else {
-								table.run("SELECT ROWID FROM " +  FusionApi.EXPERIMENTS + " WHERE ResearcherId='" + at_table.getFirstRow()[0] + "' AND VideoURL LIKE '%/" + uri[5] + "' AND Questionnaire DOES NOT CONTAIN '/'");
+								table.run("SELECT ROWID FROM " +  SheetsApi.EXPERIMENTS + " WHERE ResearcherId='" + at_table.getFirstRow()[0] + "' AND VideoURL LIKE '%/" + uri[5] + "' AND Questionnaire DOES NOT CONTAIN '/'");
 							}
 						} else {
-							table.run("SELECT ROWID FROM " +  FusionApi.EXPERIMENTS + " WHERE ResearcherId='" + at_table.getFirstRow()[0] + "' AND VideoURL LIKE '%/" + uri[5] + "'");
+							table.run("SELECT ROWID FROM " +  SheetsApi.EXPERIMENTS + " WHERE ResearcherId='" + at_table.getFirstRow()[0] + "' AND VideoURL LIKE '%/" + uri[5] + "'");
 						}
 
 						if ( table.rowCount() > 0 ) {
@@ -153,7 +153,7 @@ public class SocialSkipAPIv1 extends HttpServlet {
 
 					if (dataType.equals("interactions")) {
 
-						table.run("SELECT * FROM " +  FusionApi.DOWNLOAD + where.toString());
+						table.run("SELECT * FROM " +  SheetsApi.DOWNLOAD + where.toString());
 
 						for (Iterator<String[]> rows = table.getRowsIterator(); rows.hasNext(); ) {
 
@@ -173,7 +173,7 @@ public class SocialSkipAPIv1 extends HttpServlet {
 						}
 					} else if (dataType.equals("timeseries")) {
 
-						table.run("SELECT Time, SkipTime FROM " +  FusionApi.DOWNLOAD + where + " ORDER BY Time");
+						table.run("SELECT Time, SkipTime FROM " +  SheetsApi.DOWNLOAD + where + " ORDER BY Time");
 
 						List<Integer> ts = timeseries(table, uri[6].toLowerCase());
 
@@ -206,7 +206,7 @@ public class SocialSkipAPIv1 extends HttpServlet {
 	}
 	
 
-	private List<Integer> timeseries(FusionApi data, String type) {
+	private List<Integer> timeseries(SheetsApi data, String type) {
 		int begin, end;
 
 		List<Integer> bts = new ArrayList<Integer>();

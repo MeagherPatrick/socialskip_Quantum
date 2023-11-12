@@ -14,7 +14,7 @@ import javax.servlet.http.*;
 
 import com.google.gson.Gson;
 
-import socialskip.FusionApi;
+import socialskip.SheetsApi;
 
 /* This servlet is executed in response to a Researchers action of Inserting,
  * Updating or Deleting an experiment from his list of active ones.
@@ -24,9 +24,9 @@ public class ResearcherVideosServlet extends HttpServlet {
 
 	public static boolean isVideoResearcher(String videoID)
 			throws SocketTimeoutException, IOException, ServletException, GeneralSecurityException{
-		FusionApi tables = new FusionApi();
+		SheetsApi tables = new SheetsApi();
 		boolean found = false;
-	 	tables.run("SELECT ROWID FROM " + FusionApi.EXPERIMENTS + " WHERE ResearcherId='" + UserInfo.getResearcherID() + "' AND ROWID='" + videoID +"'");
+	 	tables.run("SELECT ROWID FROM " + SheetsApi.EXPERIMENTS + " WHERE ResearcherId='" + UserInfo.getResearcherID() + "' AND ROWID='" + videoID +"'");
 
 	 	for (Iterator<String[]> rows = tables.getRowsIterator(); rows.hasNext(); ) {
 			String[] rowValues = rows.next();
@@ -54,10 +54,10 @@ public class ResearcherVideosServlet extends HttpServlet {
     	try {
 			if ((req.getParameter("researcher")).equals(UserInfo.getResearcherID()) ) {
 
-				FusionApi tables = new FusionApi();
+				SheetsApi tables = new SheetsApi();
 				if (action == 1) { // Update experiment info
 					if (isVideoResearcher(req.getParameter("expid"))) {
-						String query = "UPDATE " + FusionApi.EXPERIMENTS
+						String query = "UPDATE " + SheetsApi.EXPERIMENTS
 								+ " SET VideoURL='" + req.getParameter("videourl").replaceAll("[<>'\"]","")
 									+ "', Title='" + descr
 									+ "', Controls='" + req.getParameter("controls")
@@ -76,7 +76,7 @@ public class ResearcherVideosServlet extends HttpServlet {
 				} else if (action == 2) { // Create new experiment
 
 					String query = "INSERT INTO "
-							+ FusionApi.EXPERIMENTS
+							+ SheetsApi.EXPERIMENTS
 							+ " (ResearcherId, VideoURL, "
 							+ "Title, Controls, Questionnaire, Info, TimeRange, IconColor, PgsColor, BgColor) VALUES ('"
 							+ req.getParameter("researcher") + "', '"
@@ -93,7 +93,7 @@ public class ResearcherVideosServlet extends HttpServlet {
 
 				} else if (action == 3) { // Delete experiment
 					if (isVideoResearcher(req.getParameter("expid"))) {
-						String query = "DELETE FROM " + FusionApi.EXPERIMENTS
+						String query = "DELETE FROM " + SheetsApi.EXPERIMENTS
 								+ " WHERE ROWID='" + req.getParameter("expid")
 								+ "'";
 						tables.run(query);
@@ -122,9 +122,9 @@ public class ResearcherVideosServlet extends HttpServlet {
 		String callback = req.getParameter("callback");
 
     	try {
-    		FusionApi tables = new FusionApi();
+    		SheetsApi tables = new SheetsApi();
     		String query = "SELECT ResearcherId, VideoURL, Questionnaire, Controls, Info, Title, TimeRange, IconColor, PgsColor, BgColor "
-    				+ "FROM " + FusionApi.EXPERIMENTS
+    				+ "FROM " + SheetsApi.EXPERIMENTS
     				+ " WHERE ROWID='" + req.getParameter("expid") + "'";
     		tables.run(query);
     		if (tables.rowCount() == 1) {

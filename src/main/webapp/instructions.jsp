@@ -4,11 +4,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="socialskip.UserInfo" %>
-<%@ page import="socialskip.FusionApi" %>
+<%@ page import="socialskip.SheetsApi" %>
 
 <%
 	String mail = UserInfo.getMail();
-	FusionApi tables = new FusionApi();
+	SheetsApi tables = new SheetsApi();
 
 	try {
 		if ("".equals(mail)) {

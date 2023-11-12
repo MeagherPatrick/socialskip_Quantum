@@ -13,7 +13,7 @@ import java.security.GeneralSecurityException;
 
 import javax.servlet.http.*;
 
-import socialskip.FusionApi;
+import socialskip.SheetsApi;
 
 import javax.servlet.ServletException;
 
@@ -25,14 +25,14 @@ public class WelcomeServlet extends HttpServlet {
 	/* This method determines if the user belongs to the researchers group. */
 	private boolean isResearcher(User user)
 			throws IOException, ServletException, GeneralSecurityException {
-    	FusionApi tables = new FusionApi();
+    	SheetsApi tables = new SheetsApi();
 	 	String userMail = user.getEmail().toLowerCase();
 	 	//System.out.println(userMail);
 		boolean found = false;
 		
 		
 		// Check Researchers table to see if user is there
-	 	tables.run("SELECT Mail FROM " + FusionApi.RESEARCHERS + " WHERE Mail='" + userMail.toLowerCase() + "'");
+	 	tables.run("SELECT Mail FROM " + SheetsApi.RESEARCHERS + " WHERE Mail='" + userMail.toLowerCase() + "'");
 	 	try {
 		 	if ((tables.getFirstRow()[0].toString()).equals(userMail)) {
 		 		found = true;

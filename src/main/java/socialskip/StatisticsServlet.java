@@ -25,14 +25,14 @@ public class StatisticsServlet extends HttpServlet {
 		result.addProperty("status", "success");
 		
 		try{
-			FusionApi table=new FusionApi();
-			table.run("SELECT COUNT(ROWID) FROM " +  FusionApi.DOWNLOAD);
+			SheetsApi table=new SheetsApi();
+			table.run("SELECT COUNT(ROWID) FROM " +  SheetsApi.DOWNLOAD);
 			result.addProperty("interactions", table.getFirstRow()[0]);
 			
-			table.run("SELECT COUNT(ROWID) FROM " +  FusionApi.EXPERIMENTS);
+			table.run("SELECT COUNT(ROWID) FROM " +  SheetsApi.EXPERIMENTS);
 			result.addProperty("videos",  table.getFirstRow()[0]);
 			
-			table.run("SELECT COUNT(ROWID) FROM " +  FusionApi.DOWNLOAD + " GROUP BY TesterId");
+			table.run("SELECT COUNT(ROWID) FROM " +  SheetsApi.DOWNLOAD + " GROUP BY TesterId");
 			result.addProperty("testers", table.rowCount());
 			
 		} catch (IndexOutOfBoundsException e) {

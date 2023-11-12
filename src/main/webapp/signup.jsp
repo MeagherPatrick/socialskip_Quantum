@@ -3,7 +3,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.Iterator"%>
-<%@ page import="socialskip.FusionApi" %>
+<%@ page import="socialskip.SheetsApi" %>
 <%@ page import="socialskip.UserInfo"%>
 <%@ page import="socialskip.WelcomeServlet" %>
 

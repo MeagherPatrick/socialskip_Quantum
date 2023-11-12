@@ -31,8 +31,8 @@ public class SignUpServlet extends HttpServlet {
 			if (!UserInfo.isAdministrator() || UserInfo.isResearcher(mail)) {
 				result = "error1";
 			} else { // else insert admin in database
-				FusionApi tables = new FusionApi();
-				String query = "INSERT INTO " + FusionApi.RESEARCHERS
+				SheetsApi tables = new SheetsApi();
+				String query = "INSERT INTO " + SheetsApi.RESEARCHERS
 						+ " (Mail, Name) VALUES ('" + mail + "', '" + name
 						+ "')";
 				tables.run(query);

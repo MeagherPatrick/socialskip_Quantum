@@ -4,12 +4,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="socialskip.UserInfo" %>
-<%@ page import="socialskip.FusionApi" %>
+<%@ page import="socialskip.SheetsApi" %>
 
 <%
 	String login1 = WelcomeServlet.getLoginUrl();
 
-    FusionApi tables = new FusionApi();
+    SheetsApi tables = new SheetsApi();
 	String mail = UserInfo.getMail();
 
 	if (mail.isEmpty() || mail == null || mail.equals("")) {
@@ -32,7 +32,7 @@
 
 	// Look for researcher videos
 	try {
-		tables.run("SELECT ROWID, VideoURL, Title, Controls, Questionnaire, Info, TimeRange, IconColor, PgsColor, BgColor FROM " + FusionApi.EXPERIMENTS + " WHERE ResearcherId='" + user + "'");
+		tables.run("SELECT ROWID, VideoURL, Title, Controls, Questionnaire, Info, TimeRange, IconColor, PgsColor, BgColor FROM " + SheetsApi.EXPERIMENTS + " WHERE ResearcherId='" + user + "'");
 	} catch(Exception e) {
 		response.sendRedirect("/error.jsp");
 	}

@@ -3,11 +3,11 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="socialskip.UserInfo" %>
-<%@ page import="socialskip.FusionApi" %>
+<%@ page import="socialskip.SheetsApi" %>
 
 <%
 	String mail = UserInfo.getMail();
-	FusionApi tables = new FusionApi();
+	SheetsApi tables = new SheetsApi();
 
 	try {
 		if ("".equals(mail)) {
@@ -35,7 +35,7 @@
 		<%@include file="header.jsp" %>
 
 		<%
-		String query = "SELECT * FROM " + FusionApi.ACCESS_TOKENS + " WHERE ResearcherId=" + UserInfo.getResearcherID();
+		String query = "SELECT * FROM " + SheetsApi.ACCESS_TOKENS + " WHERE ResearcherId=" + UserInfo.getResearcherID();
 		tables.run(query);
 		%>
 

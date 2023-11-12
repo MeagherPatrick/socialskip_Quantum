@@ -49,18 +49,18 @@ public class GenerateAccessTokenServlet  extends HttpServlet {
 		
 		try {
 			
-			FusionApi tables = new FusionApi();
+			SheetsApi tables = new SheetsApi();
 			
-			query1 = "SELECT ROWID FROM " + FusionApi.ACCESS_TOKENS + " WHERE ResearcherId=" + UserInfo.getResearcherID();
+			query1 = "SELECT ROWID FROM " + SheetsApi.ACCESS_TOKENS + " WHERE ResearcherId=" + UserInfo.getResearcherID();
 			tables.run(query1);
 			
 			if (tables.rowCount() > 0) { // if already have token
-				query2 = "UPDATE " + FusionApi.ACCESS_TOKENS
+				query2 = "UPDATE " + SheetsApi.ACCESS_TOKENS
 						+ " SET AccessToken='" + uuid + "'"
 						+ " WHERE ROWID='" + tables.getFirstRow()[0] + "'";
 				tables.run(query2);
 			} else { // if not have token
-				query3 = "INSERT INTO " + FusionApi.ACCESS_TOKENS
+				query3 = "INSERT INTO " + SheetsApi.ACCESS_TOKENS
 						+ " (ResearcherId, AccessToken) VALUES ('"
 						+ UserInfo.getResearcherID() + "', '"
 						+ uuid + "')";

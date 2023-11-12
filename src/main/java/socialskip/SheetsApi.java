@@ -19,6 +19,9 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
+
+
+
 import java.io.*;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -65,6 +68,29 @@ public class SheetsApi {
 			Collections.singletonList(SheetsScopes.SPREADSHEETS);
 	private static final String CREDENTIALS_FILE_PATH = "/credentials.json.json";
 
+	/**
+	 * Executes a sheets Tables SQL query and store the results.
+	 */
+	public void run(String query) throws IOException, GeneralSecurityException {
+		// Assuming the query is in the format of 'SheetID!A1:B10'
+		// Split the query to extract spreadsheet ID and range
+		String[] parts = query.split("!");
+		if (parts.length != 2) {
+			System.out.println("Invalid query format. Use 'SheetID!Range'");
+			return;
+		}
+	
+		String spreadsheetId = parts[0];
+		String range = parts[1];
+	
+		QueryResults queryResults = getResults(spreadsheetId, range);
+	
+		if (queryResults.getColumnNames().isEmpty() && queryResults.getRows().isEmpty()) {
+			last = null;
+		} else {
+			last = queryResults;
+		}
+	}
 	/**
 	 * Creates an authorized Credential object.
 	 *
@@ -246,17 +272,4 @@ public class SheetsApi {
 			return rows;
 		}
 	}
-// TODO
-// /**
-// 	 * Executes a Fusion Tables SQL query and store the results.
-// 	 */
-// 	public void run(String query) throws IOException, SocketTimeoutException, GeneralSecurityException {
-
-// 	    Sql sql = fusiontables.query().sql(query);
-
-// 	    Sqlresponse response = sql.execute();
-
-// 	    last = getResults(response);
-
-// 	}
  }

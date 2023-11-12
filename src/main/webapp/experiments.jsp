@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.net.SocketTimeoutException"%>
 <%@ page import="java.util.Iterator"%>
-<%@ page import="socialskip.FusionApi"%>
+<%@ page import="socialskip.SheetsApi"%>
 <%@ page import="socialskip.UserInfo" %>
 
 <% 
@@ -16,13 +16,13 @@
 		response.sendRedirect("/error.jsp?reason=nopermission"); 
 	}
 
-	FusionApi expTable = new FusionApi();
-	FusionApi researchersTable = new FusionApi();
+	SheetsApi expTable = new SheetsApi();
+	SheetsApi researchersTable = new SheetsApi();
 
 	// select data from experiments and researchers tables
 	try {
-		expTable.run("SELECT ROWID, Title, ResearcherId FROM " + FusionApi.EXPERIMENTS + " ORDER BY ResearcherId");
-		researchersTable.run("SELECT ROWID, Name, Mail FROM " + FusionApi.RESEARCHERS);
+		expTable.run("SELECT ROWID, Title, ResearcherId FROM " + SheetsApi.EXPERIMENTS + " ORDER BY ResearcherId");
+		researchersTable.run("SELECT ROWID, Name, Mail FROM " + SheetsApi.RESEARCHERS);
 	} catch(SocketTimeoutException e) {
 		response.sendRedirect("/error.jsp");
 	} catch(Exception e) {
