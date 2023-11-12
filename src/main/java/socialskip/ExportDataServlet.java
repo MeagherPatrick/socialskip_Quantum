@@ -35,8 +35,8 @@ public class ExportDataServlet extends HttpServlet {
 
 		try{
 			if (ResearcherVideosServlet.isVideoResearcher(videoid)) {
-				FusionApi table=new FusionApi();
-				table.run("SELECT TesterId, Time, TransactionId, TransactionTime, Transaction, SkipTime FROM " +  FusionApi.DOWNLOAD + " WHERE VideoId='" + req.getParameter("videoid") + "'");
+				SheetsApi table=new SheetsApi();
+				table.run("SELECT TesterId, Time, TransactionId, TransactionTime, Transaction, SkipTime FROM " +  SheetsApi.DOWNLOAD + " WHERE VideoId='" + req.getParameter("videoid") + "'");
 				
 				out.println("TesterId,Time,TransactionId,TransactionTime,Transaction, SkipTime");
 				

@@ -37,7 +37,7 @@ public class ChartsDataServlet extends HttpServlet {
 
 			if(ResearcherVideosServlet.isVideoResearcher(expid)) {
 
-				table.run("SELECT Time, SkipTime, Count() FROM " +  FusionApi.DOWNLOAD + " WHERE VideoId='" + expid +"' AND TransactionId='" + transid + "' GROUP BY Time, SkipTime ORDER BY Time");
+				table.run("SELECT Time, SkipTime, Count() FROM " +  SheetsApi.DOWNLOAD + " WHERE VideoId='" + expid +"' AND TransactionId='" + transid + "' GROUP BY Time, SkipTime ORDER BY Time");
 
 				for (Iterator<String[]> rows = table.getRowsIterator(); rows.hasNext(); ) {
 					String[] rowValues = rows.next();
