@@ -62,7 +62,7 @@ public class SheetsApi {
 	 * If modifying these scopes, delete your previously saved tokens/ folder.
 	 */
 	private static final List<String> SCOPES =
-			Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
+			Collections.singletonList(SheetsScopes.SPREADSHEETS);
 	private static final String CREDENTIALS_FILE_PATH = "/credentials.json.json";
 
 	/**
@@ -246,4 +246,17 @@ public class SheetsApi {
 			return rows;
 		}
 	}
-}
+// TODO
+// /**
+// 	 * Executes a Fusion Tables SQL query and store the results.
+// 	 */
+// 	public void run(String query) throws IOException, SocketTimeoutException, GeneralSecurityException {
+
+// 	    Sql sql = fusiontables.query().sql(query);
+
+// 	    Sqlresponse response = sql.execute();
+
+// 	    last = getResults(response);
+
+// 	}
+ }
