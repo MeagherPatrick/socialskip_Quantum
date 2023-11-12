@@ -9,7 +9,7 @@
     <artifactId>socialskip-org</artifactId>
 
     <properties>
-        <app.id>socialskip-hrd</app.id>
+        <app.id>amiable-dragon-404402</app.id>
         <app.version>1</app.version>
         <appengine.version>1.9.42</appengine.version>
         <gcloud.plugin.version>0.9.58.v20150505</gcloud.plugin.version>
